@@ -32,45 +32,30 @@ const login = async (req, res) => {
 };
 
 const register = async (req, res) => {
-    console.log('Received Request Body:', req.body);
-  
-    try {
-      const { username, password, firstName, lastName, email, created_at } = req.body;
-  
-      // Check if required fields are missing
-    //   if (!username || !password || !firstName || !lastName || !email || !created_at) {
-    //     return res.status(400).json({ message: "All fields are required" });
-    //   }
-  
-      // Check if the username is already taken
-      const existingUser = await User.findOne({ username });
-      if (existingUser) {
-        return res.status(400).json({ message: "Username already exists" });
-      }
-  
-      // Create a new user
-      const user = new User({
-        username,
-        password,
-        firstName,
-        lastName,
-        email,
-        created_at
-      });
-  
-      // Save the user to the database
-      await user.save();
-  
-      // Respond with a success message and user details
-      res.status(200).json({ message: "User registered successfully", user });
-    } catch (error) {
-      // Handle unexpected errors
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  };
-  
-  
+  const { username, password, firstName, lastName,email,created_at } = req.body;
+  if (!username || !password || !firstName || !lastName || !email || !created_at ) {
+    res.status(400).send({ message: "all fields are required" });
+  }
+
+  try {
+    // const user = await User.create({ username, password, firstName, lastName });
+
+    const user = new User({
+      username,
+      password,
+      firstName,
+      lastName,
+      email,
+      created_at
+    });
+
+    await user.save();
+
+    res.status(200).send({ user });
+  } catch (e) {
+    res.status(500).send({ error: e });
+  }
+};
   
 module.exports = {
   login,

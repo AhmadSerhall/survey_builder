@@ -1,7 +1,3 @@
-// username
-// password
-// email
-// created_at
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
@@ -17,17 +13,17 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 6,
+    minlength: 3,
   },
   firstName: {
     type: String,
     required: true,
-    minlength: 6,
+    minlength: 3,
   },
   lastName: {
     type: String,
     required: true,
-    minlength: 6,
+    minlength: 3,
   },
   email: {
     type: String,

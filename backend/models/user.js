@@ -29,10 +29,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    trim: true, // Remove leading and trailing whitespaces
-    lowercase: true, // Convert email to lowercase
+    trim: true, 
+    lowercase: true, 
     match: [
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Basic email format validation
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/, 
       'Please provide a valid email address',
     ],
   },
